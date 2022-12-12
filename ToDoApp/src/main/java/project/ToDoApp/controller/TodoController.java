@@ -4,7 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import project.ToDoApp.dto.MultiResponseDto;
 import project.ToDoApp.dto.SingleResponseDto;
@@ -19,7 +21,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "https://todobackend.com")
 @RestController
-@RequestMapping("/v1/todoList")
+@RequestMapping("/v1/todos")
 @Validated
 @Slf4j
 public class TodoController {
@@ -87,4 +89,11 @@ public class TodoController {
         todoService.deleteTodo(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    // 예외 처리 로직
+//    @ExceptionHandler
+//    public ResponseEntity handleException(MethodArgumentNotValidException e) {
+//        final List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
+//        return new ResponseEntity<>(fieldErrors, HttpStatus.BAD_REQUEST);
+//    }
 }
