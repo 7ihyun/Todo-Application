@@ -28,11 +28,9 @@ public class TodoService {
 
     // todo 등록
     public Todo createTodo(Todo todo) {
-//        int todoOrder = todo.getTodoOrder();
-//
-//        // 이미 존재하는 todoOrder인지 확인
-//        verifyExistOrder(todoOrder);
-//        todo.setTodoOrder(todoOrder);
+        // 완료 표시
+        if (todo.getCompleted() == true)
+            todo.setTodoStatus(Todo.TodoStatus.TODO_IS_COMPLETED);
 
         return todoRepository.save(todo);
     }
