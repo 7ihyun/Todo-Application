@@ -55,8 +55,8 @@ public class TodoService {
 
     // 전체 리스트 조회
     @Transactional(readOnly = true)
-    public Page<Todo> findTodoList(int page, int size) {
-        return todoRepository.findAll(PageRequest.of(page, size, Sort.by("id").descending()));
+    public List<Todo> findTodoList() {  // public Page<Todo> findTodoList(int page, int size)
+        return todoRepository.findAll(); // PageRequest.of(page, size, Sort.by("id").descending())
     }
 
     // 특정 id 조회
@@ -66,8 +66,8 @@ public class TodoService {
     }
 
     // 전체 리스트 삭제
-    public Page<Todo> deleteTodoList(int page, int size) {
-        return todoRepository.findAll(PageRequest.of(page, size, Sort.by("id").descending()));
+    public List<Todo> deleteTodoList() {    // public Page<Todo> deleteTodoList(int page, int size)
+        return todoRepository.findAll(); // PageRequest.of(page, size, Sort.by("id").descending())
     }
 
     // 특정 id 삭제

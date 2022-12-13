@@ -46,12 +46,13 @@ public class TodoController {
 
     // 전체 리스트 조회
     @GetMapping
-    public ResponseEntity getTodoList(@Positive @RequestParam int page, @Positive @RequestParam int size) {
-        Page<Todo> pageTodos = todoService.findTodoList(page - 1, size);
-        List<Todo> todos = pageTodos.getContent();
+    public ResponseEntity getTodoList() { // @Positive @RequestParam int page, @Positive @RequestParam int size
+//        Page<Todo> pageTodos = todoService.findTodoList(page - 1, size);
+//        List<Todo> todos = pageTodos.getContent();
 
+        List<Todo> todos = todoService.findTodoList();
         return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.todoToResponses(todos), pageTodos), HttpStatus.OK);
+                new MultiResponseDto<>(mapper.todoToResponses(todos)), HttpStatus.OK); // , pageTodos
     }
 
     // 특정 id 조회
@@ -75,12 +76,13 @@ public class TodoController {
 
     // 전체 리스트 삭제
     @DeleteMapping
-    public ResponseEntity deleteTodoList(@Positive @RequestParam int page, @Positive @RequestParam int size) {
-        Page<Todo> pageTodos = todoService.deleteTodoList(page - 1, size);
-        List<Todo> todos = pageTodos.getContent();
+    public ResponseEntity deleteTodoList() {    // @Positive @RequestParam int page, @Positive @RequestParam int size
+//        Page<Todo> pageTodos = todoService.deleteTodoList(page - 1, size);
+//        List<Todo> todos = pageTodos.getContent();
+        todoService.deleteTodoList();
 
-        return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.todoToResponses(todos), pageTodos), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        // return new ResponseEntity<>(new MultiResponseDto<>(mapper.todoToResponses(todos), pageTodos), HttpStatus.NO_CONTENT);
     }
 
     // 특정 할 일 삭제
