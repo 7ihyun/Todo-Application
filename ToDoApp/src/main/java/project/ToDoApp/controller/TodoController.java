@@ -1,15 +1,10 @@
 package project.ToDoApp.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import project.ToDoApp.dto.MultiResponseDto;
-import project.ToDoApp.dto.SingleResponseDto;
 import project.ToDoApp.dto.TodoDto;
 import project.ToDoApp.entity.Todo;
 import project.ToDoApp.mapper.TodoMapper;
@@ -40,8 +35,7 @@ public class TodoController {
 
         TodoDto.Response response = mapper.todoToResponse(todoService.createTodo(todo));
 
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(response), HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     // 전체 리스트 조회
@@ -51,8 +45,7 @@ public class TodoController {
 //        List<Todo> todos = pageTodos.getContent();
 
         List<Todo> todos = todoService.findTodoList();
-        return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.todoToResponses(todos)), HttpStatus.OK); // , pageTodos
+        return new ResponseEntity<>(mapper.todoToResponses(todos), HttpStatus.OK); // , pageTodos
     }
 
     // 특정 id 조회
@@ -60,8 +53,7 @@ public class TodoController {
     public ResponseEntity getTodo(@PathVariable("id") @Positive int id) {
         Todo todo = todoService.findTodo(id);
 
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.todoToResponse(todo)), HttpStatus.OK);
+        return new ResponseEntity<>(mapper.todoToResponse(todo), HttpStatus.OK);
     }
 
     // 내용 및 완료 여부 수정
@@ -70,8 +62,7 @@ public class TodoController {
         requestBody.setId(id);
         Todo todo = todoService.updateTodo(mapper.todoPatchToTodo(requestBody));
 
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.todoToResponse(todo)), HttpStatus.OK);
+        return new ResponseEntity<>(mapper.todoToResponse(todo), HttpStatus.OK);
     }
 
     // 전체 리스트 삭제

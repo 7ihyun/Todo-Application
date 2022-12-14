@@ -17,7 +17,6 @@ public class TodoDto {
         @NotNull
         private int todoOrder;
 
-        @NotNull
         private Boolean completed;
     }
 
@@ -31,6 +30,9 @@ public class TodoDto {
 
         @NotNull
         private Boolean completed;
+
+        @NotNull
+        private int todoOrder;
 
         private Todo.TodoStatus todoStatus;
 
@@ -52,6 +54,9 @@ public class TodoDto {
 
         @NotNull
         private Boolean completed;
+
+        private String url;
+
         private Todo.TodoStatus todoStatus;
 
         public String getTodoStatus() {
