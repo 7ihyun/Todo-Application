@@ -23,28 +23,22 @@ public class TodoDto {
     @Getter
     @AllArgsConstructor
     public static class Patch {
-        private int id;
+        private Long id;
 
         @NotBlank
         private String title;
 
         @NotNull
-        private Boolean completed;
-
-        @NotNull
         private int todoOrder;
 
-        private Todo.TodoStatus todoStatus;
-
-        public void setId(int id) {
-            this.id = id;
-        }
+        @NotNull
+        private Boolean completed;
     }
 
     @Getter
     @AllArgsConstructor
     public static class Response {
-        private int id;
+        private Long id;
 
         @NotBlank
         private String title;
@@ -56,11 +50,5 @@ public class TodoDto {
         private Boolean completed;
 
         private String url;
-
-        private Todo.TodoStatus todoStatus;
-
-        public String getTodoStatus() {
-            return todoStatus.getStatus();
-        }
     }
 }

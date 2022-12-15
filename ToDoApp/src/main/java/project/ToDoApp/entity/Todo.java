@@ -13,7 +13,8 @@ import javax.persistence.*;
 public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "todo_id")
+    private Long id;
 
     @Column(nullable = false)
     private String title; // 내용

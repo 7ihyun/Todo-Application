@@ -16,9 +16,9 @@ import java.util.List;
 
 @CrossOrigin(origins = "https://todobackend.com")
 @RestController
-@RequestMapping("/v1/todos")
+@RequestMapping("/todos")
 @Validated
-@Slf4j
+//@Slf4j
 public class TodoController {
     private final TodoService todoService;
     private final TodoMapper mapper;
@@ -40,45 +40,47 @@ public class TodoController {
 
     // 전체 리스트 조회
     @GetMapping
-    public ResponseEntity getTodoList() { // @Positive @RequestParam int page, @Positive @RequestParam int size
+    public ResponseEntity getTodos() { // @Positive @RequestParam int page, @Positive @RequestParam int size
 //        Page<Todo> pageTodos = todoService.findTodoList(page - 1, size);
 //        List<Todo> todos = pageTodos.getContent();
 
-        List<Todo> todos = todoService.findTodoList();
-        return new ResponseEntity<>(mapper.todoToResponses(todos), HttpStatus.OK); // , pageTodos
+        List<Todo> todos = todoService.findTodos();
+        return new ResponseEntity<>(mapper.todosToResponses(todos), HttpStatus.OK); // , pageTodos
     }
 
     // 특정 id 조회
-    @GetMapping("/{id}")
-    public ResponseEntity getTodo(@PathVariable("id") @Positive int id) {
+    @GetMapping("/{todo_id}")
+    public ResponseEntity getTodo(@PathVariable("todo_id") @Positive Long id) {
         Todo todo = todoService.findTodo(id);
 
         return new ResponseEntity<>(mapper.todoToResponse(todo), HttpStatus.OK);
     }
 
     // 내용 및 완료 여부 수정
-    @PatchMapping("/{id}")
-    public ResponseEntity patchTodo(@PathVariable("id") @Positive int id, @Valid @RequestBody TodoDto.Patch requestBody) {
-        requestBody.setId(id);
-        Todo todo = todoService.updateTodo(mapper.todoPatchToTodo(requestBody));
+    @PatchMapping("/{todo_id}")
+    public ResponseEntity patchTodo(@PathVariable("todo_id") @Positive Long id, @Valid @RequestBody TodoDto.Patch requestBody) {
+//        requestBody.setId(id);
+//        Todo todo = mapper.todoPatchToTodo(requestBody);
+//        TodoDto.Response response = mapper.todoToResponse(todoService.updateTodo(todo));
+        Todo updateTodo = todoService.updateTodo(id, requestBody);
 
-        return new ResponseEntity<>(mapper.todoToResponse(todo), HttpStatus.OK);
+        return new ResponseEntity<>(mapper.todoToResponse(updateTodo), HttpStatus.OK);
     }
 
     // 전체 리스트 삭제
     @DeleteMapping
-    public ResponseEntity deleteTodoList() {    // @Positive @RequestParam int page, @Positive @RequestParam int size
+    public ResponseEntity deleteTodos() {    // @Positive @RequestParam int page, @Positive @RequestParam int size
 //        Page<Todo> pageTodos = todoService.deleteTodoList(page - 1, size);
 //        List<Todo> todos = pageTodos.getContent();
-        todoService.deleteTodoList();
+        todoService.deleteTodos();
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         // return new ResponseEntity<>(new MultiResponseDto<>(mapper.todoToResponses(todos), pageTodos), HttpStatus.NO_CONTENT);
     }
 
     // 특정 할 일 삭제
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteTodo(@PathVariable("id") @Positive int id) {
+    @DeleteMapping("/{todo_id}")
+    public ResponseEntity deleteTodo(@PathVariable("todo_id") @Positive Long id) {
         todoService.deleteTodo(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

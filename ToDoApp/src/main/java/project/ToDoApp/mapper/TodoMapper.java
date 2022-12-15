@@ -12,5 +12,5 @@ public interface TodoMapper {
     Todo todoPostToTodo(TodoDto.Post requestBody);
     Todo todoPatchToTodo(TodoDto.Patch requestBody);
     TodoDto.Response todoToResponse(Todo todo);
-    List<TodoDto.Response> todoToResponses(List<Todo> todos);
+    List<TodoDto.Response> todosToResponses(List<Todo> todos);
 }
