@@ -1,6 +1,5 @@
 package project.ToDoApp.controller;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -38,6 +37,14 @@ public class TodoController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    // 특정 id 조회
+    @GetMapping("/{todo_id}")
+    public ResponseEntity getTodo(@PathVariable("todo_id") @Positive Long id) {
+        Todo todo = todoService.findTodo(id);
+
+        return new ResponseEntity<>(mapper.todoToResponse(todo), HttpStatus.OK);
+    }
+
     // 전체 리스트 조회
     @GetMapping
     public ResponseEntity getTodos() { // @Positive @RequestParam int page, @Positive @RequestParam int size
@@ -46,14 +53,6 @@ public class TodoController {
 
         List<Todo> todos = todoService.findTodos();
         return new ResponseEntity<>(mapper.todosToResponses(todos), HttpStatus.OK); // , pageTodos
-    }
-
-    // 특정 id 조회
-    @GetMapping("/{todo_id}")
-    public ResponseEntity getTodo(@PathVariable("todo_id") @Positive Long id) {
-        Todo todo = todoService.findTodo(id);
-
-        return new ResponseEntity<>(mapper.todoToResponse(todo), HttpStatus.OK);
     }
 
     // 내용 및 완료 여부 수정
@@ -67,6 +66,13 @@ public class TodoController {
         return new ResponseEntity<>(mapper.todoToResponse(updateTodo), HttpStatus.OK);
     }
 
+    // 특정 할 일 삭제
+    @DeleteMapping("/{todo_id}")
+    public ResponseEntity deleteTodo(@PathVariable("todo_id") @Positive Long id) {
+        todoService.deleteTodo(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     // 전체 리스트 삭제
     @DeleteMapping
     public ResponseEntity deleteTodos() {    // @Positive @RequestParam int page, @Positive @RequestParam int size
@@ -76,13 +82,6 @@ public class TodoController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         // return new ResponseEntity<>(new MultiResponseDto<>(mapper.todoToResponses(todos), pageTodos), HttpStatus.NO_CONTENT);
-    }
-
-    // 특정 할 일 삭제
-    @DeleteMapping("/{todo_id}")
-    public ResponseEntity deleteTodo(@PathVariable("todo_id") @Positive Long id) {
-        todoService.deleteTodo(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // 예외 처리 로직

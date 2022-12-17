@@ -25,10 +25,6 @@ public class TodoService {
 
     // todo 등록
     public Todo createTodo(Todo todo) {
-        // 완료 표시
-        if (todo.getCompleted() == true)
-            todo.setTodoStatus(Todo.TodoStatus.TODO_IS_COMPLETED);
-
         return todoRepository.save(todo);
     }
 
