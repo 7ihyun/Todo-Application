@@ -1,0 +1,115 @@
+= Todo Application API Documentation
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:source-highlighter: prettify
+
+Jihyun Kim <jh129047@gmail.com>
+
+v1.0.0
+
+2022.12.18
+
+***
+API 문서 개요
+
+이 문서는 Spring MVC 기반의 Rest API 기반 애플리케이션에 대해 학습하여 작성한 Todo 애플리케이션입니다.
+Todo 애플리케이션을 사용해보고자 한다면 해당 문서를 통해 API의 구체적인 사용법을 확인할 수 있습니다.
+
+NOTE: 이 문서는 학습용으로 일부 기능에 제한이 있을 수 있습니다.
+
+***
+== TodoController
+=== Todo 등록
+.curl-request
+include::{snippets}/post-todo/curl-request.adoc[]
+
+.http-request
+include::{snippets}/post-todo/http-request.adoc[]
+
+.request-fields
+include::{snippets}/post-todo/request-fields.adoc[]
+
+.http-response
+include::{snippets}/post-todo/http-response.adoc[]
+
+.response-fields
+include::{snippets}/post-todo/response-fields.adoc[]
+
+=== Todo 수정
+.curl-request
+include::{snippets}/patch-todo/curl-request.adoc[]
+
+.http-request
+include::{snippets}/patch-todo/http-request.adoc[]
+
+.request-fields
+include::{snippets}/patch-todo/request-fields.adoc[]
+
+.http-response
+include::{snippets}/patch-todo/http-response.adoc[]
+
+.path-parameters
+include::{snippets}/patch-todo/path-parameters.adoc[]
+
+.response-fields
+include::{snippets}/patch-todo/response-fields.adoc[]
+
+=== 특정 Todo 조회
+.curl-request
+include::{snippets}/get-todo/curl-request.adoc[]
+
+.http-request
+include::{snippets}/get-todo/http-request.adoc[]
+
+.http-response
+include::{snippets}/get-todo/http-response.adoc[]
+
+.path-parameters
+include::{snippets}/get-todo/path-parameters.adoc[]
+
+.response-fields
+include::{snippets}/get-todo/response-fields.adoc[]
+
+=== 전체 Todo 조회
+.curl-request
+include::{snippets}/get-todos/curl-request.adoc[]
+
+.http-request
+include::{snippets}/get-todos/httpie-request.adoc[]
+
+.http-response
+include::{snippets}/get-todos/http-response.adoc[]
+
+.response-fields
+include::{snippets}/get-todos/response-fields.adoc[]
+
+=== 특정 Todo 삭제
+.curl-request
+include::{snippets}/delete-todo/curl-request.adoc[]
+
+.http-request
+include::{snippets}/delete-todo/http-request.adoc[]
+
+.http-response
+include::{snippets}/delete-todo/http-response.adoc[]
+
+.path-parameters
+include::{snippets}/delete-todo/path-parameters.adoc[]
+
+.httpie-request
+include::{snippets}/delete-todo/httpie-request.adoc[]
+
+=== 전체 Todo 삭제
+.curl-request
+include::{snippets}/delete-todos/curl-request.adoc[]
+
+.http-request
+include::{snippets}/delete-todos/http-request.adoc[]
+
+.http-response
+include::{snippets}/delete-todos/http-response.adoc[]
+
+.httpie-request
+include::{snippets}/delete-todos/httpie-request.adoc[]
