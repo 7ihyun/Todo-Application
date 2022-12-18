@@ -8,7 +8,6 @@ import project.ToDoApp.exception.BusinessLogicException;
 import project.ToDoApp.exception.ExceptionCode;
 import project.ToDoApp.utils.CustomBeanUtils;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,14 +28,14 @@ public class TodoService {
     }
 
     // 내용 및 완료 여부 수정
-    public Todo updateTodo(Long id, TodoDto.@Valid Patch request) {
+    public Todo updateTodo(Long id, TodoDto.Patch requestBody) {
         Todo findTodo = findTodo(id);
 
-        Optional.ofNullable(request.getTitle())
+        Optional.ofNullable(requestBody.getTitle())
                 .ifPresent(title -> findTodo.setTitle(title));
-        Optional.ofNullable(request.getTodoOrder())
+        Optional.ofNullable(requestBody.getTodoOrder())
                 .ifPresent(todoOrder -> findTodo.setTodoOrder(todoOrder));
-        Optional.ofNullable(request.getCompleted())
+        Optional.ofNullable(requestBody.getCompleted())
                 .ifPresent(completed -> findTodo.setCompleted(completed));
         
         return todoRepository.save(findTodo);

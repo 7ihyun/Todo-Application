@@ -1,14 +1,15 @@
 package project.ToDoApp.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
+@Builder
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Todo {
     @Id
@@ -41,5 +42,12 @@ public class Todo {
         TodoStatus(String status) {
             this.status = status;
         }
+    }
+
+    public Todo(Long id, String title, int todoOrder, boolean completed) {
+        this.id = id;
+        this.title = title;
+        this.todoOrder = todoOrder;
+        this.completed = completed;
     }
 }
