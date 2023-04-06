@@ -23,6 +23,6 @@ Todo 관리를 위한 웹 애플리케이션입니다.
 - Todo 등록
 - Todo 수정
 - Todo 목록 조회
-- Todo 완료 표시
+- Todo 완료 체크
 - Todo 삭제
 - CORS Error 방지
